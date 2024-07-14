@@ -36,7 +36,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void _preventScreenShotsOn() async => await ScreenProtector.preventScreenshotOn();
+  void _preventScreenShotsOn() async =>
+      await ScreenProtector.preventScreenshotOn();
 
   void playNextVideo() {
     setState(() {
@@ -49,7 +50,8 @@ class _HomeState extends State<Home> {
 
   void playPreviousVideo() {
     setState(() {
-      currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
+      currentVideoIndex =
+          (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
       flickManager.handleChangeVideo(
         VideoPlayerController.network(videoUrls[currentVideoIndex]),
       );
@@ -61,7 +63,8 @@ class _HomeState extends State<Home> {
     if (status.isGranted) {
       var dir = await getExternalStorageDirectory();
       if (dir != null) {
-        String savePath = "${dir.path}/video_${DateTime.now().millisecondsSinceEpoch}.mp4";
+        String savePath =
+            "${dir.path}/video_${DateTime.now().millisecondsSinceEpoch}.mp4";
         try {
           await Dio().download(url, savePath);
           ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +78,7 @@ class _HomeState extends State<Home> {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Permission denied')),
+        const SnackBar(content: Text('Permission denied')),
       );
     }
   }
@@ -85,6 +88,7 @@ class _HomeState extends State<Home> {
     flickManager.dispose();
     super.dispose();
   }
+
   final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
   @override
   Widget build(BuildContext context) {
@@ -200,14 +204,16 @@ class _HomeState extends State<Home> {
             child: ListView(
               children: [
                 ListTile(
-                  title: Text("Profile"),
+                  title: const Text("Profile"),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Row(
+                  title: const Row(
                     children: [
                       Text("Theme"),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Icon(Icons.sunny),
                       // Icon(Icons.nights_stay),
                     ],
@@ -217,7 +223,7 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 ListTile(
-                  title: Text("Logout"),
+                  title: const Text("Logout"),
                   onTap: () {},
                 ),
               ],

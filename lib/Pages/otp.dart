@@ -4,8 +4,10 @@ import 'package:screen_protector/screen_protector.dart';
 
 import '../utils/anotherflushbar.dart';
 import 'home.dart';
+
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.verificationID,required this.phoneNumber});
+  const OtpScreen(
+      {super.key, required this.verificationID, required this.phoneNumber});
   final String verificationID;
   final String phoneNumber;
 
@@ -22,10 +24,12 @@ class _OtpScreenState extends State<OtpScreen> {
     _preventScreenShotsOn();
     super.initState();
   }
-  void _preventScreenShotsOn() async => await ScreenProtector.preventScreenshotOn();
+
+  void _preventScreenShotsOn() async =>
+      await ScreenProtector.preventScreenshotOn();
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -33,24 +37,37 @@ class _OtpScreenState extends State<OtpScreen> {
           children: [
             Align(
                 alignment: Alignment.centerLeft,
-                child: Text("OTP havebeen Shared to \n ${widget.phoneNumber}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
-           SizedBox(height: 10,),
+                child: Text(
+                  "OTP havebeen Shared to \n ${widget.phoneNumber}",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                )),
+            const SizedBox(
+              height: 10,
+            ),
             TextField(
               keyboardType: TextInputType.number,
-              controller:otpController ,
+              controller: otpController,
               decoration: InputDecoration(
                   hintText: "OTP",
-                  border: OutlineInputBorder(borderRadius:BorderRadius.circular(10))),),
-            SizedBox(height: 10,),
-            isLoading? CircularProgressIndicator(color: Color(0XFFEB9079) ,) :ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0XFFEB9079),
-                    shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(10))
-                ),
-                onPressed: ()async{
-                  if(otpController.text.isEmpty){
-                    showFlushbar(context,"Enter a Valid OTP");
-                  }else {
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            isLoading
+                ? const CircularProgressIndicator(
+                    color: Color(0XFFEB9079),
+                  )
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0XFFEB9079),
+                        shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    onPressed: () async {
+                      if (otpController.text.isEmpty) {
+                        showFlushbar(context, "Enter a Valid OTP");
+                      } else {
                         setState(() {
                           isLoading = true;
                         });
@@ -65,7 +82,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           });
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Home()),
+                            MaterialPageRoute(builder: (context) => const Home()),
                           );
                         } catch (e) {
                           setState(() {
@@ -74,7 +91,11 @@ class _OtpScreenState extends State<OtpScreen> {
                           showFlushbar(context, e.toString());
                         }
                       }
-                    }, child: Text("Verify",style: TextStyle(color: Colors.black),))
+                    },
+                    child: const Text(
+                      "Verify",
+                      style: TextStyle(color: Colors.black),
+                    ))
           ],
         ),
       ),
